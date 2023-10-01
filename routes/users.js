@@ -1,56 +1,25 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const User = require("../models/User");
 const authenticateToken = require("../middlewares/authenticateToken");
-const bcrypt = require('bcrypt');
+const { hashPassword } = require("../middlewares/bcrypt");
+const { comparePassword } = require("../middlewares/bcrypt");
 const { where } = require("sequelize");
 
-const saltRounds = 10;
-
-const hashPassword = async (password) => {
-  try {
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log("hashedPassword", hashedPassword);
-    return hashedPassword;
-  } catch (error) {
-    console.error("Error hashing password: ", error);
-    throw error; // Rethrow so that calling function can handle the error appropriately
-  }
-};
-
-// Exemple d'utilisation
-const password = "mySecurePassword";
-hashPassword(password);
-console.log("password", password);
-
-
-
-
-const comparePassword = (password) => {
-  try {
-    const match = bcrypt.compare(password, hash);
-    console.log("match", match);
-    return match;
-  } catch (error) {
-    console.error("Error comparing passwords: ", error);
-    throw error; // Rethrow so that calling function can handle the error appropriately
-  }
-}
-
-
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get("/", function (req, res, next) {
+  res.send("respond with a resource");
 });
 
-
+console.log("Route /signup chargée");
 
 //signup
 //url: http://localhost:3000/users/signup
-router.post("/signup", async function (req, res, next) {
+router.post("/signup", hashPassword, async function (req, res, next) {
   try {
-    const { name, email, password } = req.body;
+    const { name, email } = req.body;
+    const password = req.hashedPassword;
     const existingUser = await User.findOne({ where: { email } });
     console.log("existingUser", existingUser);
     console.log("req.body", req.body);
@@ -64,7 +33,7 @@ router.post("/signup", async function (req, res, next) {
     console.log("user creation successful !!", user);
 
     // create token if data are correct
-    const token = jwt.sign({ name, email, password }, "secretKey", {
+    const token = jwt.sign({ name, email, password }, process.env.JWT_PRIVATE_KEY, {
       expiresIn: "24h",
     });
 
@@ -81,10 +50,5 @@ router.post("/signup", async function (req, res, next) {
     res.status(500).send("Erreur lors de l'inscription");
   }
 });
-
-
-
-
-
 
 module.exports = router;

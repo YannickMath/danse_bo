@@ -5,7 +5,7 @@ var logger = require('morgan');
 
 
 const db = require("./models/connection"); //pour se connecter à la base de données, et créer une instance de sequelize
-const User = require("./models/user"); //pour se connecter à la base de données, et créer un modèle User
+const User = require("./models/User"); //pour se connecter à la base de données, et créer un modèle User
 
 //synchroniser la table User avec la base de données
 db.sync({ alter: true }) //autorisé à modifier la table

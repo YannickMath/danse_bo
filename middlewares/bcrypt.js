@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
-
 const saltRounds = 10;
+
+console.log("Middleware hashPassword chargé");
+console.log("Middleware comparePassword chargé");
 
 const hashPassword = async (req, res, next) => {
   try {
@@ -13,14 +15,9 @@ const hashPassword = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Error hashing password: ", error);
-    res.status(500).send("Error hashing password");
+    return res.status(500).send("Error hashing password");
   }
 };
-
-// Exemple d'utilisation
-const password = "mySecurePassword";
-hashPassword(password);
-console.log("password", password);
 
 const comparePassword = async (req, res, next) => {
   try {
@@ -36,6 +33,8 @@ const comparePassword = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Error comparing passwords: ", error);
-    res.status(500).send("Error comparing passwords");
+    return res.status(500).send("Error comparing passwords");
   }
 };
+
+module.exports = { hashPassword, comparePassword };

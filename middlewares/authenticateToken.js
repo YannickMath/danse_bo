@@ -5,7 +5,7 @@ function authenticateToken(req, res, next) {
   const token = authHeader && authHeader.split(" ")[1]; //récupère le token
 
   if (token == null) return res.sendStatus(401);
-_KEY
+  _KEY;
   jwt.verify(token, JWT_PRIVATE, (err, user) => {
     //vérifie le token))
     if (err) return res.sendStatus(403);
