@@ -10,7 +10,7 @@ const hashPassword = async (req, res, next) => {
     if (!password) res.status(400).send("No password provided");
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log("hashedPassword", hashedPassword);
+    // console.log("hashedPassword", hashedPassword);
     req.hashedPassword = hashedPassword;
     next();
   } catch (error) {
@@ -27,7 +27,7 @@ const comparePassword = async (req, res, next) => {
     if (!password) res.status(400).send("No password provided");
 
     const match = bcrypt.compare(password, hash);
-    console.log("match", match);
+    // console.log("match", match);
     if (!match) res.status(400).send("Passwords do not match");
 
     next();

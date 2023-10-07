@@ -21,9 +21,9 @@ router.post("/signup", hashPassword, async function (req, res, next) {
     const { name, email } = req.body;
     const password = req.hashedPassword;
     const existingUser = await User.findOne({ where: { email } });
-    console.log("existingUser", existingUser);
-    console.log("req.body", req.body);
-    console.log("where", where);
+    // console.log("existingUser", existingUser);
+    // console.log("req.body", req.body);
+    // console.log("where", where);
 
     if (existingUser) {
       return res.status(401).json({ message: "Utilisateur déjà existant !" });
@@ -44,7 +44,7 @@ router.post("/signup", hashPassword, async function (req, res, next) {
       token: token,
     });
 
-    console.log("token", token);
+    // console.log("token", token);
   } catch (error) {
     console.error(error);
     res.status(500).send("Erreur lors de l'inscription");

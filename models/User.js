@@ -1,5 +1,4 @@
-
-//CONNEXION TYPE AVEC ORM SEQUELIZE, PUIS CREATION DE LA TABLE USER
+//CONNEXION WITH ORM SEQUELIZE, AND CREATION OF USER TABLE
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("./connection");
 
@@ -33,7 +32,6 @@ const User = db.define("User", {
     allowNull: false,
     defaultValue: false,
   },
-  // Ajoutez autant d'autres attributs que vous le souhaitez ici
 });
 
 if (db) {

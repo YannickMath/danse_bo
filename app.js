@@ -5,18 +5,18 @@ var logger = require('morgan');
 
 
 const db = require("./models/connection"); //pour se connecter à la base de données, et créer une instance de sequelize
-const User = require("./models/User"); //pour se connecter à la base de données, et créer un modèle User
+const User = require("./models/User");
 
 //synchroniser la table User avec la base de données
 db.sync({ alter: true }) //autorisé à modifier la table
-  .then(() => console.log("La table User a été créée avec succès")) //si la table a été créée avec succès
+  .then(() => console.log("La table User a été créée avec succès"))
   .catch(
     (
-      error //si la table n'a pas été créée avec succès
+      error
     ) =>
       console.error(
         "Une erreur s'est produite lors de la création de la table User :",
-        error //afficher l'erreur
+        error
       )
   );
 
