@@ -19,7 +19,6 @@ router.get("/", async function (req, res, next) {
     if (!burgers || burgers.length === 0) {
       return res.status(404).json({ message: "Aucun burger trouvé !" });
     } else {
-      //   console.log("burgers", burgers);
       return res.status(200).json(burgers);
     }
   } catch (error) {
