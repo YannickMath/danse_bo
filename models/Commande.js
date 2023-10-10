@@ -4,7 +4,7 @@ const db = require("./connection");
 
 const Commande = db.define("Commande", {
 
-    no_Commande: {
+    no_commande: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,

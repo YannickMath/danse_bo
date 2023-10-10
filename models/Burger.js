@@ -4,14 +4,14 @@ const db = require("./connection");
 
 const Burger = db.define("Burger", {
 
-    no_Burger: {
+    no_burger: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
     },
 
-    name: {
+    nom: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -21,7 +21,7 @@ const Burger = db.define("Burger", {
         allowNull: false,
     },
 
-    price: {
+    prix: {
         type: DataTypes.FLOAT,
         allowNull: false,
     },

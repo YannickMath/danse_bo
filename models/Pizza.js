@@ -4,7 +4,7 @@ const db = require("./connection");
 
 const Pizza = db.define("Pizza", {
 
-        no_Pizza: {
+        no_pizza: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
@@ -21,7 +21,7 @@ const Pizza = db.define("Pizza", {
             allowNull: false,
         },
 
-        price: {
+        prix: {
             type: DataTypes.FLOAT,
             allowNull: false,
         },

@@ -5,14 +5,24 @@ const User = require("../models/User");
 const authenticateToken = require("../middlewares/authenticateToken");
 const { hashPassword } = require("../middlewares/bcrypt");
 const { comparePassword } = require("../middlewares/bcrypt");
-const { where } = require("sequelize");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
+  try {
+    const users = User.findAll();
+   if(!users){
+     return res.status(404).json({message: "Aucun utilisateur trouvé !"})
+    } else {
+      console.log("users", users);
+      return res.status(200).json(users);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Erreur lors de la récupération des utilisateurs");
+  }
 });
 
-console.log("Route /signup chargée");
+
 
 //signup
 //url: http://localhost:3000/users/signup
