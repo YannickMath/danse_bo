@@ -11,7 +11,7 @@ const Pizza = db.define("Pizza", {
             autoIncrement: true,
         },
 
-        name: {
+        nom: {
             type: DataTypes.STRING,
             allowNull: false,
         },
